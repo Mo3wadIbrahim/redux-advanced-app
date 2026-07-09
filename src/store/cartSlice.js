@@ -17,13 +17,18 @@ const cartSlice = createSlice({
       );
       if (isItemExist >= 0) {
         state.items[isItemExist].quantity++;
-        state.items[isItemExist].total =
-          state.items[isItemExist].total + state.items[isItemExist].price;
+        state.items[isItemExist].total += state.items[isItemExist].price;
         state.totalPrice += action.payload.price;
         state.totalQuantities++;
       } else {
-        state.items.push(action.payload);
-        state.totalPrice = state.totalPrice + action.payload.price;
+        const newItem = {
+          title: action.payload.title,
+          quantity: 1,
+          total: action.payload.price,
+          price: action.payload.price,
+        };
+        state.items.push(newItem);
+        state.totalPrice += action.payload.price;
         state.totalQuantities++;
       }
     },
@@ -35,13 +40,12 @@ const cartSlice = createSlice({
 
       if (itemQuantity > 1) {
         state.items[isItemExist].quantity--;
-        state.items[isItemExist].total =
-          state.items[isItemExist].total - state.items[isItemExist].price;
-        state.totalPrice = state.totalPrice - action.payload.price;
+        state.items[isItemExist].total -= state.items[isItemExist].price;
+        state.totalPrice -= action.payload.price;
         state.totalQuantities--;
       } else {
         state.items.splice(isItemExist, 1);
-        state.totalPrice = state.totalPrice - action.payload.price;
+        state.totalPrice -= action.payload.price;
         state.totalQuantities--;
       }
     },

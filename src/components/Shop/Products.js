@@ -8,7 +8,7 @@ const Products = () => {
       <ul>
         <ProductItem
           title="Test 2"
-          price={6}
+          price={68}
           description="This is a first product - amazing!"
         />
       </ul>

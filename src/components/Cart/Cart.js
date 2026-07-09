@@ -19,7 +19,7 @@ const Cart = () => {
       )}
       <div>
         <h3>Total Quantities: {totalQuantities}</h3>
-        <h3>Total Price: {totalPrice}</h3>
+        <h3>Total Price: ${totalPrice.toFixed(2)}</h3>
       </div>
     </Card>
   );
