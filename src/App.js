@@ -5,7 +5,7 @@ import Products from "./components/Shop/Products";
 import { useSelector } from "react-redux";
 
 function App() {
-  const isCartOpen = useSelector((state) => state.cart.isCartOpen);
+  const isCartOpen = useSelector((state) => state.ui.isCartOpen);
   return (
     <Layout>
       {isCartOpen && <Cart />}
