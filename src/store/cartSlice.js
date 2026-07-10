@@ -11,19 +11,19 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
-      const isItemExist = state.items.findIndex(
+      const itemIndex = state.items.findIndex(
         (item) => item.title === action.payload.title,
       );
-      if (isItemExist >= 0) {
-        state.items[isItemExist].quantity++;
-        state.items[isItemExist].total += state.items[isItemExist].price;
+      if (itemIndex >= 0) {
+        state.items[itemIndex].quantity++;
+        state.items[itemIndex].total += state.items[itemIndex].price;
         state.totalPrice += action.payload.price;
         state.totalQuantities++;
       } else {
         const newItem = {
           title: action.payload.title,
           quantity: 1,
-          total: action.payload.price,
+          total: action.payload.total,
           price: action.payload.price,
         };
         state.items.push(newItem);
@@ -32,18 +32,17 @@ const cartSlice = createSlice({
       }
     },
     removeItem: (state, action) => {
-      const isItemExist = state.items.findIndex(
+      const itemIndex = state.items.findIndex(
         (item) => item.title === action.payload.title,
       );
-      const itemQuantity = action.payload.quantity;
 
-      if (itemQuantity > 1) {
-        state.items[isItemExist].quantity--;
-        state.items[isItemExist].total -= state.items[isItemExist].price;
+      if (state.items[itemIndex].quantity > 1) {
+        state.items[itemIndex].quantity--;
+        state.items[itemIndex].total -= state.items[itemIndex].price;
         state.totalPrice -= action.payload.price;
         state.totalQuantities--;
       } else {
-        state.items.splice(isItemExist, 1);
+        state.items.splice(itemIndex, 1);
         state.totalPrice -= action.payload.price;
         state.totalQuantities--;
       }
