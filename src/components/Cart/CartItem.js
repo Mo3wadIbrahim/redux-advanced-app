@@ -3,15 +3,14 @@ import { useDispatch } from "react-redux";
 
 import { cartActions } from "../../store/cartSlice";
 
-const CartItem = ({ item }) => {
-  const { title, quantity, total, price } = item;
+const CartItem = ({ id, title, quantity, total, price }) => {
   const dispatch = useDispatch();
-
+  const currentItem = { id, title, price };
   const handleAddItem = () => {
-    dispatch(cartActions.addItem(item));
+    dispatch(cartActions.addItem(currentItem));
   };
   const handleRemoveItem = () => {
-    dispatch(cartActions.removeItem(item));
+    dispatch(cartActions.removeItem(currentItem));
   };
   return (
     <li className={classes.item}>

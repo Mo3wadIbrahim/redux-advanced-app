@@ -13,7 +13,14 @@ const Cart = () => {
       {items.length > 0 && (
         <ul>
           {items.map((item) => (
-            <CartItem item={item} key={item.title} />
+            <CartItem
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              quantity={item.quantity}
+              total={item.total}
+              price={item.price}
+            />
           ))}
         </ul>
       )}
