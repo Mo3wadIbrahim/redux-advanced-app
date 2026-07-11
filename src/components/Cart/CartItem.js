@@ -1,6 +1,5 @@
 import classes from "./CartItem.module.css";
 import { useDispatch } from "react-redux";
-
 import { cartActions } from "../../store/cartSlice";
 
 const CartItem = ({ id, title, quantity, total, price }) => {
@@ -29,7 +28,7 @@ const CartItem = ({ id, title, quantity, total, price }) => {
           x <span>{quantity}</span>
         </div>
         <div className={classes.actions}>
-          <button onClick={handleRemoveItem}>&times;</button>
+          <button onClick={handleRemoveItem}> X </button>
           <button onClick={handleMinusItem}>-</button>
           <button onClick={handleAddItem}>+</button>
         </div>
