@@ -12,6 +12,9 @@ const CartItem = ({ id, title, quantity, total, price }) => {
   const handleRemoveItem = () => {
     dispatch(cartActions.removeItem(currentItem));
   };
+  const handleMinusItem = () => {
+    dispatch(cartActions.minusItem(currentItem));
+  };
   return (
     <li className={classes.item}>
       <header>
@@ -26,7 +29,8 @@ const CartItem = ({ id, title, quantity, total, price }) => {
           x <span>{quantity}</span>
         </div>
         <div className={classes.actions}>
-          <button onClick={handleRemoveItem}>-</button>
+          <button onClick={handleRemoveItem}>&times;</button>
+          <button onClick={handleMinusItem}>-</button>
           <button onClick={handleAddItem}>+</button>
         </div>
       </div>

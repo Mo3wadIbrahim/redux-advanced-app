@@ -32,7 +32,7 @@ const cartSlice = createSlice({
         state.totalQuantities++;
       }
     },
-    removeItem: (state, action) => {
+    minusItem: (state, action) => {
       const itemIndex = state.items.findIndex(
         (item) => item.id === action.payload.id,
       );
@@ -46,6 +46,16 @@ const cartSlice = createSlice({
         state.items.splice(itemIndex, 1);
         state.totalPrice -= action.payload.price;
         state.totalQuantities--;
+      }
+    },
+    removeItem: (state, action) => {
+      const itemIndex = state.items.findIndex(
+        (item) => item.id === action.payload.id,
+      );
+      if (itemIndex >= 0) {
+        state.totalPrice -= state.items[itemIndex].total;
+        state.totalQuantities -= state.items[itemIndex].quantity;
+        state.items.splice(itemIndex, 1);
       }
     },
   },
