@@ -22,9 +22,7 @@ function App() {
 
         const data = await response.json();
 
-        dispatch(
-          cartActions.replaceCart(data || { items: [], totalQuantity: 0 }),
-        );
+        dispatch(cartActions.replaceCart(data));
       } catch (error) {
         console.error("Fetching failed:", error);
       }

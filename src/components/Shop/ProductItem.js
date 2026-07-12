@@ -14,7 +14,7 @@ const ProductItem = ({ title, price, description, id }) => {
           <h3>
             {id}: {title}
           </h3>
-          <div className={classes.price}>${price.toFixed(2)}</div>
+          <div className={classes.price}>${(price / 100).toFixed(2)}</div>
         </header>
         <p>{description}</p>
         <div className={classes.actions}>

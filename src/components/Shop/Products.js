@@ -4,13 +4,13 @@ import classes from "./Products.module.css";
 const DUMMY_PRODUCTS = [
   {
     id: "p1",
-    price: 7.99,
+    price: 799,
     title: "Test 1",
     description: "This is a first product - amazing!",
   },
   {
     id: "p2",
-    price: 14.99,
+    price: 1499,
     title: "Test 2",
     description: "This is a second product - amazing!",
   },
