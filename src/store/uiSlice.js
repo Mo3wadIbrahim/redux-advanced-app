@@ -4,10 +4,22 @@ const uiSlice = createSlice({
   name: "ui",
   initialState: {
     isCartOpen: false,
+    notification: null,
+    isDataFetched: false,
   },
   reducers: {
     toggleCart: (state) => {
       state.isCartOpen = !state.isCartOpen;
+    },
+    showNotification: (state, action) => {
+      state.notification = {
+        status: action.payload.status,
+        title: action.payload.title,
+        message: action.payload.message,
+      };
+    },
+    setIsDataFetched: (state, action) => {
+      state.isDataFetched = true;
     },
   },
 });
