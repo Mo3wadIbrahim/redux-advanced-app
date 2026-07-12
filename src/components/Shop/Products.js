@@ -14,18 +14,6 @@ const DUMMY_PRODUCTS = [
     title: "Test 2",
     description: "This is a second product - amazing!",
   },
-  {
-    id: "p3",
-    price: 19.99,
-    title: "Test 3",
-    description: "This is a third product - amazing!",
-  },
-  {
-    id: "p4",
-    price: 29.99,
-    title: "Test 4",
-    description: "This is a fourth product - amazing!",
-  },
 ];
 const Products = () => {
   return (
