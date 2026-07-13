@@ -76,24 +76,32 @@ const cartSlice = createSlice({
 function fetchCartData() {
   return async (dispatch) => {
     const fetchData = async () => {
+      dispatch(uiActions.setIsLoading(true));
       const response = await fetch(
         "https://react-app-edbe6-default-rtdb.firebaseio.com/cart.json",
       );
       if (!response.ok) throw new Error("Could not fetch cart data!");
+      if (response.ok) dispatch(uiActions.setIsLoading(false));
       const data = await response.json();
       return data;
     };
     try {
+      dispatch(
+        uiActions.showNotification({
+          status: "pending",
+          title: "Fetching...",
+          message: "Fetching cart data!",
+        }),
+      );
       const cartData = await fetchData();
-      if (!cartData) {
+      if (cartData.totalQuantities === 0) {
         dispatch(
-          cartActions.replaceCart({
-            items: [],
-            totalQuantities: 0,
-            totalPrice: 0,
+          uiActions.showNotification({
+            status: "error",
+            title: "Error!",
+            message: "There is no any items in the cart!",
           }),
         );
-        return;
       } else {
         dispatch(
           uiActions.showNotification({
@@ -103,7 +111,11 @@ function fetchCartData() {
           }),
         );
       }
-      dispatch(cartActions.replaceCart(cartData));
+      dispatch(
+        cartActions.replaceCart(
+          cartData || { items: [], totalQuantities: 0, totalPrice: 0 },
+        ),
+      );
     } catch (error) {
       dispatch(
         uiActions.showNotification({

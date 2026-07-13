@@ -12,6 +12,7 @@ function App() {
   const isCartOpen = useSelector((state) => state.ui.isCartOpen);
   const cart = useSelector((state) => state.cart);
   const notification = useSelector((state) => state.ui.notification);
+  const isLoading = useSelector((state) => state.ui.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,7 +35,7 @@ function App() {
           message={notification.message}
         />
       )}
-      <Layout>{isCartOpen ? <Cart /> : <Products />}</Layout>
+      {!isLoading && <Layout>{isCartOpen ? <Cart /> : <Products />}</Layout>}
     </Fragment>
   );
 }

@@ -2,12 +2,10 @@ import Card from "../UI/Card";
 import classes from "./ProductItem.module.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
-import { uiActions } from "../../store/uiSlice";
 const ProductItem = ({ title, price, description, id }) => {
   const dispatch = useDispatch();
   const handleAddItem = () => {
     dispatch(cartActions.addItem({ id, title, price }));
-    dispatch(uiActions.setIsDataFetched());
   };
   return (
     <li className={classes.item} key={id}>

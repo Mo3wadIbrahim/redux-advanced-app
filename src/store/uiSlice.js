@@ -5,7 +5,7 @@ const uiSlice = createSlice({
   initialState: {
     isCartOpen: false,
     notification: null,
-    isDataFetched: false,
+    isLoading: true,
   },
   reducers: {
     toggleCart: (state) => {
@@ -21,8 +21,8 @@ const uiSlice = createSlice({
     hideNotification: (state) => {
       state.notification = null;
     },
-    setIsDataFetched: (state, action) => {
-      state.isDataFetched = true;
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
     },
   },
 });
