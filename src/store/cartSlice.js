@@ -75,12 +75,11 @@ const cartSlice = createSlice({
 // Async action creator for fetching cart data from a remote server, with error handling and notifications.
 function fetchCartData(url) {
   return async (dispatch) => {
+    dispatch(uiActions.setIsLoading(true));
     const fetchData = async () => {
-      dispatch(uiActions.setIsLoading(true));
       const response = await fetch(url);
       if (!response.ok) throw new Error("Could not fetch cart data!");
       const data = await response.json();
-      dispatch(uiActions.setIsLoading(false));
       return data;
     };
     try {
@@ -123,6 +122,7 @@ function fetchCartData(url) {
         }),
       );
     }
+    dispatch(uiActions.setIsLoading(false));
   };
 }
 // Async action creators for sending and fetching cart data from a remote server, with error handling and notifications.
