@@ -12,7 +12,6 @@ function App() {
   const isCartOpen = useSelector((state) => state.ui.isCartOpen);
   const cart = useSelector((state) => state.cart);
   const notification = useSelector((state) => state.ui.notification);
-  const isDataFetched = useSelector((state) => state.ui.isDataFetched);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,14 +19,12 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!isDataFetched) {
+    if (!cart.changed) {
       return;
     }
     dispatch(cartActions.sendCartData(cart));
-  }, [cart]);
-  setTimeout(() => {
-    dispatch(uiActions.hideNotification());
-  }, 5000);
+  }, [cart, dispatch]);
+
   return (
     <Fragment>
       {notification && (

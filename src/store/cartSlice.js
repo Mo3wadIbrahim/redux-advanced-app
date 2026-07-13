@@ -4,6 +4,7 @@ const initialState = {
   items: [],
   totalQuantities: 0,
   totalPrice: 0,
+  changed: false,
 };
 // Cart slice with reducers for adding, removing, and updating items in the cart, as well as async actions for sending and fetching cart data from a remote server.
 const cartSlice = createSlice({
@@ -11,11 +12,13 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     replaceCart: (state, action) => {
+      state.changed = false;
       state.items = action.payload.items || [];
       state.totalQuantities = action.payload.totalQuantities || 0;
       state.totalPrice = action.payload.totalPrice || 0;
     },
     addItem: (state, action) => {
+      state.changed = true;
       const itemIndex = state.items.findIndex(
         (item) => item.id === action.payload.id,
       );
@@ -38,6 +41,7 @@ const cartSlice = createSlice({
       }
     },
     minusItem: (state, action) => {
+      state.changed = true;
       const itemIndex = state.items.findIndex(
         (item) => item.id === action.payload.id,
       );
@@ -56,6 +60,7 @@ const cartSlice = createSlice({
       }
     },
     removeItem: (state, action) => {
+      state.changed = true;
       const itemIndex = state.items.findIndex(
         (item) => item.id === action.payload.id,
       );
@@ -117,7 +122,11 @@ function sendCartData(cart) {
         "https://react-app-edbe6-default-rtdb.firebaseio.com/cart.json",
         {
           method: "PUT",
-          body: JSON.stringify(cart),
+          body: JSON.stringify({
+            items: cart.items,
+            totalQuantities: cart.totalQuantities,
+            totalPrice: cart.totalPrice,
+          }),
         },
       );
       if (!response.ok) throw new Error("Sending cart data failed.");
