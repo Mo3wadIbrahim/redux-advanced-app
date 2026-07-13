@@ -25,7 +25,9 @@ function App() {
     }
     dispatch(cartActions.sendCartData(cart));
   }, [cart]);
-
+  setTimeout(() => {
+    dispatch(uiActions.hideNotification());
+  }, 5000);
   return (
     <Fragment>
       {notification && (

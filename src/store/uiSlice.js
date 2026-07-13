@@ -18,6 +18,9 @@ const uiSlice = createSlice({
         message: action.payload.message,
       };
     },
+    hideNotification: (state) => {
+      state.notification = null;
+    },
     setIsDataFetched: (state, action) => {
       state.isDataFetched = true;
     },
