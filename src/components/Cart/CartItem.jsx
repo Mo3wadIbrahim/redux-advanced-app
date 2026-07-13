@@ -1,6 +1,7 @@
 import classes from "./CartItem.module.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
+import { centsUsdFormatter } from "../../util/helpers";
 const CartItem = ({ id, title, quantity, total, price }) => {
   const dispatch = useDispatch();
   const currentItem = { id, title, price };
@@ -18,9 +19,9 @@ const CartItem = ({ id, title, quantity, total, price }) => {
       <header>
         <h3>{title}</h3>
         <div className={classes.price}>
-          ${(total / 100).toFixed(2)}{" "}
+          {centsUsdFormatter(total)}{" "}
           <span className={classes.itemprice}>
-            (${(price / 100).toFixed(2)}/item)
+            {centsUsdFormatter(price)}/item
           </span>
         </div>
       </header>

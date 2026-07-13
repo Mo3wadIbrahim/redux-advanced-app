@@ -2,6 +2,7 @@ import Card from "../UI/Card";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
+import { centsUsdFormatter } from "../../util/helpers";
 const Cart = () => {
   const items = useSelector((state) => state.cart.items);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
@@ -26,7 +27,7 @@ const Cart = () => {
       )}
       <div>
         <h3>Total Quantities: {totalQuantities}</h3>
-        <h3>Total Price: ${(totalPrice / 100).toFixed(2)}</h3>
+        <h3>Total Price: {centsUsdFormatter(totalPrice)}</h3>
       </div>
     </Card>
   );

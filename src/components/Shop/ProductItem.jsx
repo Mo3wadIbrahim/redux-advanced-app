@@ -2,6 +2,7 @@ import Card from "../UI/Card";
 import classes from "./ProductItem.module.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
+import { centsUsdFormatter } from "../../util/helpers";
 const ProductItem = ({ title, price, description, id }) => {
   const dispatch = useDispatch();
   const handleAddItem = () => {
@@ -14,7 +15,7 @@ const ProductItem = ({ title, price, description, id }) => {
           <h3>
             {id}: {title}
           </h3>
-          <div className={classes.price}>${(price / 100).toFixed(2)}</div>
+          <div className={classes.price}>{centsUsdFormatter(price)}</div>
         </header>
         <p>{description}</p>
         <div className={classes.actions}>

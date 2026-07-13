@@ -20,10 +20,15 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!cart.changed) {
-      return;
+    if (cart.changed) {
+      dispatch(
+        cartActions.sendCartData({
+          items: cart.items,
+          totalQuantities: cart.totalQuantities,
+          totalPrice: cart.totalPrice,
+        }),
+      );
     }
-    dispatch(cartActions.sendCartData(cart));
   }, [cart, dispatch]);
 
   return (
