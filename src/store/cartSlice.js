@@ -145,7 +145,7 @@ function sendCartData(cart) {
 // Exporting the cart actions and the reducer for use in the Redux store.
 export const cartActions = {
   ...cartSlice.actions,
-  sendCartData,
   fetchCartData,
+  sendCartData,
 };
 export default cartSlice.reducer;
