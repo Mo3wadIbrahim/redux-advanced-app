@@ -85,14 +85,15 @@ function fetchCartData() {
     };
     try {
       const cartData = await fetchData();
-      if (!cartData.items) {
+      if (!cartData) {
         dispatch(
-          uiActions.showNotification({
-            status: "error",
-            title: "Error!",
-            message: "There is no cart data to fetch!",
+          cartActions.replaceCart({
+            items: [],
+            totalQuantities: 0,
+            totalPrice: 0,
           }),
         );
+        return;
       } else {
         dispatch(
           uiActions.showNotification({
