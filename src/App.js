@@ -24,16 +24,24 @@ function App() {
         if (!response.ok) throw new Error("Could not fetch cart data!");
 
         const data = await response.json();
-
-        dispatch(
-          uiActions.showNotification({
-            status: "success",
-            title: "Success!",
-            message: "Cart data fetched successfully!",
-          }),
-        );
+        if (!data.items) {
+          dispatch(
+            uiActions.showNotification({
+              status: "success",
+              title: "Success!",
+              message: "There is no cart data to fetch!",
+            }),
+          );
+        } else {
+          dispatch(
+            uiActions.showNotification({
+              status: "success",
+              title: "Success!",
+              message: "Cart data fetched successfully!",
+            }),
+          );
+        }
         dispatch(cartActions.replaceCart(data));
-        dispatch(uiActions.setIsDataFetched());
       } catch (error) {
         dispatch(
           uiActions.showNotification({
