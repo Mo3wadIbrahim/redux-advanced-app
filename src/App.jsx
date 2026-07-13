@@ -16,17 +16,24 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(cartActions.fetchCartData());
+    dispatch(
+      cartActions.fetchCartData(
+        "https://react-app-edbe6-default-rtdb.firebaseio.com/cart.json",
+      ),
+    );
   }, [dispatch]);
 
   useEffect(() => {
     if (cart.changed) {
       dispatch(
-        cartActions.sendCartData({
-          items: cart.items,
-          totalQuantities: cart.totalQuantities,
-          totalPrice: cart.totalPrice,
-        }),
+        cartActions.sendCartData(
+          "https://react-app-edbe6-default-rtdb.firebaseio.com/cart.json",
+          {
+            items: cart.items,
+            totalQuantities: cart.totalQuantities,
+            totalPrice: cart.totalPrice,
+          },
+        ),
       );
     }
   }, [cart, dispatch]);
