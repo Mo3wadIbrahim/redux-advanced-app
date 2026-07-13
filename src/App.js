@@ -16,75 +16,14 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchCartData = async () => {
-      try {
-        const response = await fetch(
-          "https://react-app-edbe6-default-rtdb.firebaseio.com/cart.json",
-        );
-        if (!response.ok) throw new Error("Could not fetch cart data!");
-
-        const data = await response.json();
-        if (!data.items) {
-          dispatch(
-            uiActions.showNotification({
-              status: "success",
-              title: "Success!",
-              message: "There is no cart data to fetch!",
-            }),
-          );
-        } else {
-          dispatch(
-            uiActions.showNotification({
-              status: "success",
-              title: "Success!",
-              message: "Cart data fetched successfully!",
-            }),
-          );
-        }
-        dispatch(cartActions.replaceCart(data));
-      } catch (error) {
-        dispatch(
-          uiActions.showNotification({
-            status: "error",
-            title: "Error!",
-            message: "Fetching cart data failed!",
-          }),
-        );
-      }
-    };
-    fetchCartData();
+    dispatch(cartActions.fetchCartData());
   }, [dispatch]);
+
   useEffect(() => {
-    const sendRequest = async () => {
-      try {
-        const response = await fetch(
-          "https://react-app-edbe6-default-rtdb.firebaseio.com/cart.json",
-          {
-            method: "PUT",
-            body: JSON.stringify(cart),
-          },
-        );
-        dispatch(
-          uiActions.showNotification({
-            status: "success",
-            title: "Success!",
-            message: "Cart data sent successfully!",
-          }),
-        );
-      } catch (error) {
-        dispatch(
-          uiActions.showNotification({
-            status: "error",
-            title: "Error!",
-            message: "Sending cart data failed!",
-          }),
-        );
-      }
-    };
     if (!isDataFetched) {
       return;
     }
-    sendRequest();
+    dispatch(cartActions.sendCartData(cart));
   }, [cart]);
 
   return (
