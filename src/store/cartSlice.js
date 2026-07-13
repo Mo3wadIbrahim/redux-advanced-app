@@ -5,7 +5,7 @@ const initialState = {
   totalQuantities: 0,
   totalPrice: 0,
 };
-
+// Cart slice with reducers for adding, removing, and updating items in the cart, as well as async actions for sending and fetching cart data from a remote server.
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -67,7 +67,7 @@ const cartSlice = createSlice({
     },
   },
 });
-
+// Async action creators for sending and fetching cart data from a remote server, with error handling and notifications.
 function sendCartData(cart) {
   return async (dispatch) => {
     const sendRequest = async () => {
@@ -100,6 +100,7 @@ function sendCartData(cart) {
     }
   };
 }
+// Async action creator for fetching cart data from a remote server, with error handling and notifications.
 function fetchCartData() {
   return async (dispatch) => {
     const fetchData = async () => {
@@ -141,7 +142,7 @@ function fetchCartData() {
     }
   };
 }
-
+// Exporting the cart actions and the reducer for use in the Redux store.
 export const cartActions = {
   ...cartSlice.actions,
   sendCartData,
